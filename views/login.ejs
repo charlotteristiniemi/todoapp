@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Att göra i Seoul</title>
+		<meta charset="utf-8">
+		<link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:600" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<!-- <link rel="stylesheet" type="text/css" href="css/sweetalert.css"> -->
+
+		<!-- <script src="http://localhost:3000/livereload.js?snipver=1"></script> -->
+	</head>
+	<body>
+
+		<%- include layouts/header.ejs %>
+
+		<section id="login-form">
+			<form id="add-form" method="post">
+				<label for="email"></label>	
+				<input class="input-tag" type="text" name="email" placeholder="Email..." required>
+				
+				<label for="password"></label>
+				<input class="input-tag" type="text" name="password" placeholder="Lösenord..." required>
+				
+				<div class="button-div">
+					<input type="submit" value="Logga in"/>
+					<!-- <button id="login-btn" >Logga in</button> -->
+				</div>
+				
+			</form>
+		</section>
+
+		<%- include layouts/footer.ejs %>
+
+		<!-- <script src="js/jquery.min.js"></script> -->
+		<script type="text/javascript" src="js/script.js"></script>
+
+	</body>
+</html>

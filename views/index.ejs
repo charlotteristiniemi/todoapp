@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Att göra i Seoul</title>
+		<meta charset="utf-8">
+		<link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:600" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<!-- <link rel="stylesheet" type="text/css" href="css/sweetalert.css"> -->
+
+		<!-- <script src="http://localhost:3000/livereload.js?snipver=1"></script> -->
+	</head>
+	<body>
+
+		<%- include layouts/header.ejs %>
+		
+		<!-- Sökningsformulär -->
+		<div id="search-form">
+			<form id="search" role="form" method="POST">
+				<div class="input-div">
+					<label for="search"></label>
+					<input id="select-search" type="text" name="search" placeholder="Sök aktivitet..." required>
+				</div>
+				<!-- Sökning görs på entertangent -->
+				<div id="search-button-div">
+					<input type="submit" value="Sök" class="filter-btn">
+				</div>
+			</form>
+		</div>
+
+		<section class="filter">
+			
+			<!-- Filter allt -->
+			<form role="form" method="POST">
+				<div class="input-div">
+					<p><input type="checkbox" name="filter" value="all" onchange="this.form.submit()"><em>Allt</em></p>
+				</div>
+			</form> 
+
+			<!-- Filter mat och dryck -->
+			<form role="form" method="POST">
+				<div class="input-div">
+					<p><input type="checkbox" name="filter" value="1" onchange="this.form.submit()"><em>Mat och dryck</em></p>
+				</div>
+			</form> 
+
+			<!-- Filter sevärdheter -->
+			<form role="form" method="POST">
+				<div class="input-div">
+					<p><input type="checkbox" name="filter" value="2" onchange="this.form.submit()"><em>Sevärdheter</em></p>
+				</div>
+			</form> 
+
+			<!-- Filter shopping -->
+			<form role="form" method="POST">
+				<div class="input-div">
+					<p><input type="checkbox" name="filter" value="3" onchange="this.form.submit()"><em>Shopping</em></p>
+				</div>
+			</form> 
+
+			<!-- Filter övrigt -->
+			<form role="form" method="POST">
+				<div class="input-div">
+					<p><input type="checkbox" name="filter" value="4" onchange="this.form.submit()"><em>Övrigt</em></p>
+				</div>
+			</form> 
+
+			<!-- Filter avklarat -->
+			<form role="form" method="POST">
+				<div class="input-div">
+					<p><input type="checkbox" name="filter" value="5" onchange="this.form.submit()"><em>Avklarat</em></p>
+				</div>
+			</form>      
+			
+
+			<!-- <form role="form" method="POST">
+				<div class="input-div">
+					<input type="submit" name="filter" value="Mat och dryck"></input>
+				</div>
+			</form> -->
+		</section>
+
+		<section class="activity-section">
+			<% if (data.length) { 
+				for (var i = 0 ; i < data.length ; i++ ) { %>
+					<div class="container">
+						<div class="img">image</div>
+						<div class="text">
+							<h2><%=data[i].Title%></h2>
+							<p><%=data[i].Content%></p>
+						</div>
+					</div>
+				<% }
+	    }
+
+	    else { %>
+	    <p>Oops, det hittades inga aktiviteter!</p>
+	    <% } %>
+    </section>
+
+		<%- include layouts/footer.ejs %>
+
+		<!-- <script src="js/jquery.min.js"></script> -->
+		<script type="text/javascript" src="js/script.js"></script>
+
+	</body>
+</html>

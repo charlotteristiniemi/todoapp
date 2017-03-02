@@ -1,0 +1,17 @@
+#login-form {
+	width: 30%;
+	margin: 0 auto;
+	margin-top: 50px;
+
+	.input-tag{
+		width: 100%;
+		height: 33px;
+		margin-bottom: 20px;
+		
+		&:focus {
+			outline: none;
+		}
+	}
+
+	.button{}
+}

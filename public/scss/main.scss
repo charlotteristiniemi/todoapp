@@ -1,0 +1,172 @@
+@import 'login-style';
+
+
+/* FONTS */
+$lato: 'Lato', sans-serif;
+
+/* WEIGHTS */
+$thin: 100;
+$regular: 300;
+
+/* COLORS */
+$primary-color: #3F51B5;
+
+/* @MIXINS */
+
+@mixin thinlato ($lato, $thin) {
+	font-family: $lato;
+	font-weight: $thin;
+}
+
+@mixin regularlato ($lato, $regular) {
+	font-family: $lato;
+	font-weight: $regular;
+}
+
+/* FONTSTYLING */
+h1 {
+	margin: 0;
+	color: white;
+	@include thinlato($lato, $thin);
+	text-align: center;
+}
+
+h2 {
+	margin: 0;
+	@include thinlato($lato, $regular);
+}
+
+h3 {
+	margin: 0;
+}
+
+h4 {
+	margin: 0;
+}
+
+p {
+	margin: 0;
+	margin-top: 10px;
+	@include thinlato($lato, $regular);
+}
+
+/*REGULAR STYLING*/
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.login-field {
+	height: 30px;
+	background-color: #303F9F;
+	width: 100%;
+	position: relative;
+	
+	h4 {
+		color: white;
+		@include regularlato($lato, $regular);
+		position: absolute;
+		top: 50%;
+		right: 40px;
+		transform: translateY(-50%);
+
+		&:hover {
+			color: #C5CAE9;
+			cursor: pointer;
+		}
+	}
+}
+
+header {
+	background-color: $primary-color;
+	margin: 0;
+	padding: 0;
+	height: 200px;
+	box-shadow: 0 6px 7px rgba(0,0,0,0.22), 0 2px 2px rgba(0,0,0,0.44);
+
+	.page-header {
+		padding-top: 30px;
+		
+		h1 {
+			img {
+				height: 27px;
+			}
+		}
+	}
+}
+
+#search-form {
+	position: absolute;
+	top: 130px;
+	left: 50%;
+	transform: translateX(-50%);
+
+	#select-search {
+		width: 400px;
+		height: 35px;
+		border: none;
+		background-color: $primary-color;
+		border-bottom: 1px solid white;
+		padding-left: 10px;
+		color: white;
+		@include thinlato($lato, $thin);
+		font-weight: 100;
+		font-size: 18px;
+
+		&:focus{
+			outline: none;
+		}
+
+		&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+		  color: white;
+		  font-family: 'Lato', sans-serif;
+			font-weight: 100;
+			font-size: 22px;
+		}
+
+	}
+}
+
+#search-button-div {
+	display: none;
+}
+
+.filter {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+	margin-top: 15px;
+}
+
+.activity-section {
+	width: 95%;
+	margin: 0 auto;
+	margin-top: 20px;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+
+	.container {
+		// flex: 1;
+		display: inline-block;
+		margin: 10px;
+		width: 300px;
+		height: 400px;
+		box-shadow: 0 0px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+		.img {
+			width: 100%;
+			height: 180px;
+			background-color: #d7d7d7;
+		}
+
+		.text {
+			margin: 15px;
+		}
+	}
+}
+
+footer {
+
+}
