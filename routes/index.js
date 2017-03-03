@@ -226,13 +226,20 @@ exports.passportAuthentication = function(passport) {
 
 exports.filterSearch = function (req, res) {
 
+	if (req.user === undefined){
+		var user = false;
+	}
+	else {
+		var user = req.user.Username;
+	}
+
 	if(req.body.filter !== undefined) {
 		//Gör filtergrejer 
-		filter(req.body.filter, res);
+		filter(req.body.filter, res, user);
 	}
 	else {
 		//Gör sökgrejer
-		search(req.body.search, res);
+		search(req.body.search, res, user);
 	}
 };
 
@@ -242,7 +249,7 @@ exports.filterSearch = function (req, res) {
  */
 
 // Filter
-function filter(filterType, res) {
+function filter(filterType, res, user) {
 
 	if (filterType === 'all') {
 
@@ -252,7 +259,7 @@ function filter(filterType, res) {
 			connection.query( 'SELECT * FROM Categories' , function (err2, row2, field2) {
 				if (err2) console.log(err2);
 
-				res.render('index',{page_title:"To do in Seoul", data:row1, cData:row2});
+				res.render('index',{page_title:"To do in Seoul", user:user, data:row1, cData:row2});
 			});
 		});
 	}
@@ -264,14 +271,14 @@ function filter(filterType, res) {
 			connection.query( 'SELECT * FROM Categories' , function (err2, row2, field2) {
 				if (err2) console.log(err2);
 
-				res.render('index',{page_title:"To do in Seoul", data:row1, cData:row2});
+				res.render('index',{page_title:"To do in Seoul", user:user, data:row1, cData:row2});
 			});
 		});
 	}
 };
 
 // Search
-function search(searchType, res) {
+function search(searchType, res, user) {
 	
 	connection.query( "SELECT * FROM Activities WHERE Title LIKE '%" + searchType + "%';", function (err1, row1, field1) {
 		if (err1) console.log(err1);
@@ -279,7 +286,7 @@ function search(searchType, res) {
 		connection.query( 'SELECT * FROM Categories' , function (err2, row2, field2) {
 			if (err2) console.log(err2);
 
-			res.render('index',{page_title:"To do in Seoul", data:row1, cData:row2});
+			res.render('index',{page_title:"To do in Seoul", user:user, data:row1, cData:row2});
 		});
 	});
 };
