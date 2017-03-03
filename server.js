@@ -46,6 +46,15 @@ server.post('/login', passport.authenticate('local-login', {
 	failureRedirect: '/login',
 	failureFlash: true 
 }));
+server.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+server.get('/add_new_activity', routes.add);
+server.post('/add_new_activity', routes.save);
+server.get('/delete_activity/:id', routes.delete);
+server.get('/edit_activity/:id', routes.edit);
+server.put('/edit_activity/:id', routes.update);
 
 // Start Server
 var server = server.listen(3000,function(){

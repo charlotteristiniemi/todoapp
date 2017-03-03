@@ -1,4 +1,5 @@
 @import 'login-style';
+@import 'add-edit-style';
 
 
 /* FONTS */
@@ -10,6 +11,7 @@ $regular: 300;
 
 /* COLORS */
 $primary-color: #3F51B5;
+$accent-color: #EF6C00;
 
 /* @MIXINS */
 
@@ -76,6 +78,15 @@ body {
 			cursor: pointer;
 		}
 	}
+
+	#hi {
+		right: 150px;
+
+		&:hover {
+			color: white;
+			cursor: default;
+		}
+	}
 }
 
 header {
@@ -94,6 +105,39 @@ header {
 			}
 		}
 	}
+}
+
+/* Button add and go back*/
+
+.add-new-activity-btn, .back-btn {
+	position: absolute;
+	left: 20px;
+	border-radius: 100%;
+	width: 50px;
+	height: 50px;
+	background-color: $accent-color;
+	border: none;
+	box-shadow: 0 11px 43px rgba(0,0,0,0.2), 0 8px 24px rgba(0,0,0,0.22);
+	font-size: 20px;
+	@include regularlato($lato, $regular);
+	color: white;
+
+	&:hover {
+		cursor: pointer;
+		opacity: 0.9;
+	}
+}
+
+.add-new-activity-btn {
+	top: 50px;
+}
+
+.back-btn{
+	top: 50px;	
+}
+
+.add-new-activity-btn:focus, .back-btn:focus {
+	outline: none;
 }
 
 #search-form {
@@ -119,7 +163,7 @@ header {
 		}
 
 		&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-		  color: white;
+		  color: rgba(255,255,255,0.6);
 		  font-family: 'Lato', sans-serif;
 			font-weight: 100;
 			font-size: 22px;

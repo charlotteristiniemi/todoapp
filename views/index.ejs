@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Att göra i Seoul</title>
+		<title>To do in Seoul</title>
 		<meta charset="utf-8">
 		<link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet">
@@ -12,15 +12,27 @@
 		<!-- <script src="http://localhost:3000/livereload.js?snipver=1"></script> -->
 	</head>
 	<body>
+		<div class="login-field">
+			<% if (!user) {%>
+				<h4 onclick="loginPage()">Log In</h4>
+			<% } else { %>
+				<h4 id="hi">Hi, <%=user%></h4>
+				<h4 onclick="logoutPage()">Log Out</h4>
+			<%}%>
+		</div>
 
 		<%- include layouts/header.ejs %>
 		
+		<% if (user) {%>
+			<button class="add-new-activity-btn" onclick="addNewActivity();">+</button>	
+		<%}%>
+
 		<!-- Sökningsformulär -->
 		<div id="search-form">
 			<form id="search" role="form" method="POST">
 				<div class="input-div">
 					<label for="search"></label>
-					<input id="select-search" type="text" name="search" placeholder="Sök aktivitet..." required>
+					<input id="select-search" type="text" name="search" placeholder="Search Activity..." required>
 				</div>
 				<!-- Sökning görs på entertangent -->
 				<div id="search-button-div">
@@ -34,21 +46,21 @@
 			<!-- Filter allt -->
 			<form role="form" method="POST">
 				<div class="input-div">
-					<p><input type="checkbox" name="filter" value="all" onchange="this.form.submit()"><em>Allt</em></p>
+					<p><input type="checkbox" name="filter" value="all" onchange="this.form.submit()"><em>All</em></p>
 				</div>
 			</form> 
 
 			<!-- Filter mat och dryck -->
 			<form role="form" method="POST">
 				<div class="input-div">
-					<p><input type="checkbox" name="filter" value="1" onchange="this.form.submit()"><em>Mat och dryck</em></p>
+					<p><input type="checkbox" name="filter" value="1" onchange="this.form.submit()"><em>Food and drinks</em></p>
 				</div>
 			</form> 
 
 			<!-- Filter sevärdheter -->
 			<form role="form" method="POST">
 				<div class="input-div">
-					<p><input type="checkbox" name="filter" value="2" onchange="this.form.submit()"><em>Sevärdheter</em></p>
+					<p><input type="checkbox" name="filter" value="2" onchange="this.form.submit()"><em>Sightseeing</em></p>
 				</div>
 			</form> 
 
@@ -62,23 +74,17 @@
 			<!-- Filter övrigt -->
 			<form role="form" method="POST">
 				<div class="input-div">
-					<p><input type="checkbox" name="filter" value="4" onchange="this.form.submit()"><em>Övrigt</em></p>
+					<p><input type="checkbox" name="filter" value="4" onchange="this.form.submit()"><em>Other</em></p>
 				</div>
 			</form> 
 
 			<!-- Filter avklarat -->
 			<form role="form" method="POST">
 				<div class="input-div">
-					<p><input type="checkbox" name="filter" value="5" onchange="this.form.submit()"><em>Avklarat</em></p>
+					<p><input type="checkbox" name="filter" value="5" onchange="this.form.submit()"><em>Done</em></p>
 				</div>
 			</form>      
-			
-
-			<!-- <form role="form" method="POST">
-				<div class="input-div">
-					<input type="submit" name="filter" value="Mat och dryck"></input>
-				</div>
-			</form> -->
+		
 		</section>
 
 		<section class="activity-section">
@@ -90,18 +96,26 @@
 							<h2><%=data[i].Title%></h2>
 							<p><%=data[i].Content%></p>
 						</div>
+						<%if (user) { %>
+							<button class="change-btn" onclick="editActivity(<%=data[i].ActivityID%>);">
+								Edit
+							</button>
+							<button class="delete-btn" onclick="deleteActivity(<%=data[i].ActivityID%>);">
+								Delete
+							</button>
+						<%}%>
 					</div>
 				<% }
 	    }
 
 	    else { %>
-	    <p>Oops, det hittades inga aktiviteter!</p>
+	    <p>Oops, no activities found!</p>
 	    <% } %>
     </section>
 
 		<%- include layouts/footer.ejs %>
 
-		<!-- <script src="js/jquery.min.js"></script> -->
+		<script src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
 
 	</body>

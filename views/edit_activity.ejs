@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Edit activity</title>
+		<meta charset="utf-8">
+		<link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:600" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../css/main.css">
+		<!-- <link rel="stylesheet" type="text/css" href="css/sweetalert.css"> -->
+
+		<!-- <script src="http://localhost:3000/livereload.js?snipver=1"></script> -->
+	</head>
+	<body>
+		<div class="login-field">
+			<% if (!user) {%>
+				<h4 onclick="loginPage()">Log In</h4>
+			<% } else { %>
+				<h4 id="hi">Hi, <%=user%></h4>
+				<h4 onclick="logoutPage()">Log Out</h4>
+			<%}%>
+		</div>
+
+		<%- include layouts/header.ejs %>
+
+		<button class="back-btn" onclick="cancelAdd();"><-</button>
+
+		<div class="data-msg">
+		  <ul class="error-list"></ul>
+		</div>
+
+		<div class="input-container">
+			<form id="change-form">
+				
+				<label for="title">Title</label>
+				<div class="input-div">
+					<input class="input-tag" type="text" name="title" required value="<%=data[0].Title%>">
+				</div>
+				
+				<label for="category">Category</label>
+				<div class="input-div">
+					<select class="input-tag" name="categoryid">
+						<% if (cData.length) {
+
+							for (var i = 0 ; i < cData.length ; i++ ) { 
+								if (data[0].CategoryID == cData[i].CategoryID) {%>
+									<option value="<%=cData[i].CategoryID%>" selected><%=cData[i].CategoryName%></option>
+								<%}
+								else {%>
+								<option value="<%=cData[i].CategoryID%>"><%=cData[i].CategoryName%></option>
+								<%}
+							}
+						}
+						else { %>
+							<p>No categories found!</p>
+						<% } %>
+					</select>
+				</div>
+				
+				<label for="activity">Activity</label>
+				<div class="input-div">
+					<textarea class="input-tag-text" name="content" required value="<%=data[0].Content%>"><%=data[0].Content%></textarea>
+				</div>
+
+				<label for="image">Image</label>
+				<div class="input-div">
+					<input class="input-tag" name="image" placeholder="IMG uploader will be here"><%=data[0].ImageSrc%></input>
+				</div>
+
+				<div class="button-div">
+					<button id="change-btn" onclick="putActivity(<%=data[0].ActivityID%>)">Update</button>
+				</div>
+				
+			</form>
+		</div>
+
+		<%- include layouts/footer.ejs %>
+
+		<script src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/script.js"></script>
+
+	</body>
+</html>
