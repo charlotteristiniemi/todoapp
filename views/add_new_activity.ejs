@@ -30,7 +30,7 @@
 		</div>
 
 		<div class="input-container">
-			<form id="add-form">
+			<form id="add-form" enctype="multipart/form-data">
 
 				<label for="title">Title</label>
 				<div class="input-div">
@@ -59,7 +59,8 @@
 				
 				<label for="image">Image</label>
 				<div class="input-div">
-					<input class="input-tag" name="image" placeholder="IMG uploader will be here"></input>
+					<input type="file" name="image" accept="image/jpeg, image/png">
+					<!--<input class="input-tag" name="image" placeholder="IMG uploader will be here"></input>-->
 				</div>
 
 				<div class="button-div">

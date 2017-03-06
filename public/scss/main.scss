@@ -11,6 +11,7 @@ $regular: 300;
 
 /* COLORS */
 $primary-color: #3F51B5;
+$dark-color: #303F9F;
 $accent-color: #EF6C00;
 
 /* @MIXINS */
@@ -61,7 +62,7 @@ body {
 
 .login-field {
 	height: 30px;
-	background-color: #303F9F;
+	background-color: $dark-color;
 	width: 100%;
 	position: relative;
 	
@@ -198,6 +199,7 @@ header {
 		width: 300px;
 		height: 400px;
 		box-shadow: 0 0px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+		position: relative;
 
 		.img {
 			width: 100%;
@@ -207,6 +209,36 @@ header {
 
 		.text {
 			margin: 15px;
+			height: 135px;
+		}
+
+		.change-btn, .delete-btn {
+			position: absolute;
+			border-radius: 100%;
+			width: 40px;
+			height: 40px;
+			border: none;
+			box-shadow: 0 11px 43px rgba(0,0,0,0.2), 0 8px 24px rgba(0,0,0,0.22);
+			font-size: 10px;
+			@include regularlato($lato, $regular);
+			color: white;
+
+			&:hover {
+				cursor: pointer;
+				opacity: 0.9;
+			}
+		}
+		
+		.change-btn {
+			background-color: $dark-color;
+			top: 160px;
+			right: 15px;
+		}
+
+		.delete-btn {
+			right: 15px;
+			bottom: 15px;
+			background-color: #D32F2F;
 		}
 	}
 }
