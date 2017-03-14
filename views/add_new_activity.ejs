@@ -7,9 +7,6 @@
 		<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:600" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/main.css">
-		<!-- <link rel="stylesheet" type="text/css" href="css/sweetalert.css"> -->
-
-		<!-- <script src="http://localhost:3000/livereload.js?snipver=1"></script> -->
 	</head>
 	<body>
 		<div class="login-field">
@@ -25,46 +22,61 @@
 
 		<button class="back-btn" onclick="cancelAdd();"><-</button>
 		
-		<div class="data-msg">
-		  <ul class="error-list"></ul>
-		</div>
+		<%if (!success) {
+			if (errors) { %>
+				<section class="errors">
+					<ul>
+						<% errors.forEach(function(element) {%>
+					    <li><%= element.msg %></li>
+						<% }); %>
+					</ul>
+				</section>
+		<% }} 
+		else{%>
+			<section class="success">
+					<ul>
+					    <li>New activity added!</li>
+					</ul>
+				</section>
+		<%}%>
+
+		
 
 		<div class="input-container">
-			<form id="add-form" enctype="multipart/form-data">
+			<form id="add-form" enctype="multipart/form-data" method="POST">
 
 				<label for="title">Title</label>
 				<div class="input-div">
-					<input class="input-tag" type="text" name="title" placeholder="Title..." required>
+					<input class="input-tag" type="text" name="title" placeholder="Title...">
 				</div>
-				
+
 				<label for="category">Category</label>
 				<div class="input-div">
 					<select class="input-tag" name="categoryid">
 						<option value="">Choose category</option>
 						<% if (cData.length) {
-							for (var i = 0 ; i < data.length ; i++ ) { %>
+							for (var i = 0 ; i < cData.length ; i++ ) { %>
 								<option value="<%=cData[i].CategoryID%>"><%=cData[i].CategoryName%></option>
-							<% }
+							<%}
 						}
 						else { %>
 							<p>No categories found!</p>
 						<% } %>
 					</select>
 				</div>
-				
+
 				<label for="activity">Activity</label>
 				<div class="input-div">
-					<textarea class="input-tag-text" name="content" placeholder="Activity..." required></textarea>
+					<textarea class="input-tag-text" name="content" placeholder="Activity..."></textarea>
 				</div>
 				
 				<label for="image">Image</label>
 				<div class="input-div">
-					<input type="file" name="image" accept="image/jpeg, image/png">
-					<!--<input class="input-tag" name="image" placeholder="IMG uploader will be here"></input>-->
+					<input type="file" name="image" accept="image/jpeg, image/png" required>
 				</div>
 
 				<div class="button-div">
-					<button id="save-btn" onclick="postActivity()">Save</button>
+					<button id="save-btn" type="submit">Save</button>
 				</div>
 				
 			</form>

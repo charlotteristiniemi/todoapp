@@ -7,16 +7,13 @@
 		<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:600" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/main.css">
-		<!-- <link rel="stylesheet" type="text/css" href="css/sweetalert.css"> -->
-
-		<!-- <script src="http://localhost:3000/livereload.js?snipver=1"></script> -->
 	</head>
 	<body>
 		<div class="login-field">
 			<% if (!user) {%>
 				<h4 onclick="loginPage()">Log In</h4>
 			<% } else { %>
-				<h4 id="hi">Hi, <%=user%></h4>
+				<h4 id="hi">Hi <%=user%></h4>
 				<h4 onclick="logoutPage()">Log Out</h4>
 			<%}%>
 		</div>
@@ -45,53 +42,92 @@
 			
 			<!-- Filter allt -->
 			<form role="form" method="POST">
-				<div class="input-div">
-					<p><input type="checkbox" name="filter" value="all" onchange="this.form.submit()"><em>All</em></p>
-				</div>
+				<label>
+				  <input type="radio" name="filter" value="all" onchange="this.form.submit()"/>
+				  <%if (filter === 'all') {%>
+				  	<img src="img/all-orange.png" alt="all">
+				  <%}else{%>
+				  	<img src="img/all.png" alt="all">
+				  <%}%>
+				</label>
 			</form> 
 
 			<!-- Filter mat och dryck -->
 			<form role="form" method="POST">
-				<div class="input-div">
-					<p><input type="checkbox" name="filter" value="1" onchange="this.form.submit()"><em>Food and drinks</em></p>
-				</div>
+				<label>
+				  <input type="radio" name="filter" value="1" onchange="this.form.submit()"/>
+				  <%if (filter === '1') {%>
+				  	<img class="orange" src="img/fooddrinks-orange.png" alt="fooddrinks">
+				  <%}else{%>
+				  	<img class="black" src="img/fooddrinks.png" alt="fooddrinks">
+				  <%}%>
+				</label>
 			</form> 
 
 			<!-- Filter sevärdheter -->
 			<form role="form" method="POST">
-				<div class="input-div">
-					<p><input type="checkbox" name="filter" value="2" onchange="this.form.submit()"><em>Sightseeing</em></p>
-				</div>
+				<label>
+				  <input type="radio" name="filter" value="2" onchange="this.form.submit()"/>
+				  <%if (filter === '2') {%>
+				  	<img class="orange" src="img/sightseeing-orange.png" alt="sightseeing">
+				  <%}else{%>
+				  	<img class="black" src="img/sightseeing.png" alt="sightseeing">
+				  <%}%>
+				</label>
 			</form> 
 
 			<!-- Filter shopping -->
 			<form role="form" method="POST">
-				<div class="input-div">
-					<p><input type="checkbox" name="filter" value="3" onchange="this.form.submit()"><em>Shopping</em></p>
-				</div>
+				<label>
+				  <input type="radio" name="filter" value="3" onchange="this.form.submit()"/>
+				  <%if (filter === '3') {%>
+				  	<img class="orange" src="img/shopping-orange.png" alt="shopping">
+				  <%}else{%>
+				  	<img class="black" src="img/shopping.png" alt="shopping">
+				  <%}%>
+				</label>
 			</form> 
 
 			<!-- Filter övrigt -->
 			<form role="form" method="POST">
-				<div class="input-div">
-					<p><input type="checkbox" name="filter" value="4" onchange="this.form.submit()"><em>Other</em></p>
-				</div>
+				<label>
+				  <input type="radio" name="filter" value="4" onchange="this.form.submit()"/>
+				  <%if (filter === '4') {%>
+				  	<img class="orange" src="img/other-orange.png" alt="other">
+				  <%}else{%>
+				  	<img class="black" src="img/other.png" alt="other">
+				  <%}%>
+				</label>
 			</form> 
 
 			<!-- Filter avklarat -->
 			<form role="form" method="POST">
-				<div class="input-div">
-					<p><input type="checkbox" name="filter" value="5" onchange="this.form.submit()"><em>Done</em></p>
-				</div>
+				<label>
+				  <input type="radio" name="filter" value="5" onchange="this.form.submit()"/>
+				  <%if (filter === '5') {%>
+				  	<img class="orange" src="img/done-orange.png" alt="done">
+				  <%}else{%>
+				  	<img class="black" src="img/done.png" alt="done">
+				  <%}%>
+				</label>
 			</form>      
 		
 		</section>
 
 		<section class="activity-section">
 			<% if (data.length) { 
-				for (var i = 0 ; i < data.length ; i++ ) { %>
-					<div class="container">
-						<div class="img">image</div>
+				var num = 0;
+				for (var i = 0 ; i < data.length ; i++ ) { 
+					num = 'popup-' + i.toString()%>
+					<div class="container" data-popup-open="<%=num%>">
+						<div class="img">
+							<div class="wrapper">
+								<img src="uploads/<%=data[i].ImageSrc%>" alt="Image">
+								<%if (data[i].CategoryID === 5){%>	
+									<img class="done" src="img/done-overlay1.png" alt="done">
+								<%}%>
+							</div>
+						</div>
 						<div class="text">
 							<h2><%=data[i].Title%></h2>
 							<p><%=data[i].Content%></p>
@@ -100,10 +136,29 @@
 							<button class="change-btn" onclick="editActivity(<%=data[i].ActivityID%>);">
 								Edit
 							</button>
-							<button class="delete-btn" onclick="deleteActivity(<%=data[i].ActivityID%>);">
-								Delete
-							</button>
 						<%}%>
+					</div>
+					<div class="popup" data-popup="<%=num%>" data-popup-close="<%=num%>">
+						<div class="popup-inner">
+							<div class="popup-img">
+								<div class="popup-wrapper">
+									<img src="uploads/<%=data[i].ImageSrc%>" alt="Image">
+								</div>
+							</div>
+							<div class="text">
+								<h2><%=data[i].Title%></h2>
+								<p><%=data[i].Content%></p>
+							</div>
+							<%if (user) { %>
+								<button class="change-btn" onclick="editActivity(<%=data[i].ActivityID%>);">
+									Edit
+								</button>
+								<button class="delete-btn" onclick="deleteActivity(<%=data[i].ActivityID%>);">
+									Delete
+								</button>
+							<%}%>
+							<a class="popup-close" data-popup-close="<%=num%>" href="#">x</a>
+						</div>
 					</div>
 				<% }
 	    }

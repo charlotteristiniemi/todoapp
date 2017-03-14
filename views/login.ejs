@@ -7,13 +7,23 @@
 		<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:600" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/main.css">
-		<!-- <link rel="stylesheet" type="text/css" href="css/sweetalert.css"> -->
 	</head>
 	<body>
 
 		<div class="login-field"></div>
 
 		<%- include layouts/header.ejs %>
+
+		<button class="back-btn" onclick="cancelLogin();"><-</button>
+		
+		<%if (message.length != 0) {%>
+			<section class="message">
+				<ul>
+				  <li><%=message%></li>
+				</ul>
+			</section>
+		<%}%>
+	
 
 		<section id="login-form">
 			<form method="post">

@@ -7,9 +7,6 @@
 		<link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:600" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="../css/main.css">
-		<!-- <link rel="stylesheet" type="text/css" href="css/sweetalert.css"> -->
-
-		<!-- <script src="http://localhost:3000/livereload.js?snipver=1"></script> -->
 	</head>
 	<body>
 		<div class="login-field">
@@ -25,16 +22,30 @@
 
 		<button class="back-btn" onclick="cancelAdd();"><-</button>
 
-		<div class="data-msg">
-		  <ul class="error-list"></ul>
-		</div>
+		<%if (!success) {
+			if (errors) { %>
+				<section class="errors">
+					<ul>
+						<% errors.forEach(function(element) {%>
+					    <li><%= element.msg %></li>
+						<% }); %>
+					</ul>
+				</section>
+		<% }}
+		else{%>
+			<section class="success">
+					<ul>
+					    <li>Your activity is updated!</li>
+					</ul>
+				</section>
+		<%}%>
 
 		<div class="input-container">
-			<form id="change-form">
+			<form id="change-form" method="POST">
 				
 				<label for="title">Title</label>
 				<div class="input-div">
-					<input class="input-tag" type="text" name="title" required value="<%=data[0].Title%>">
+					<input class="input-tag" type="text" name="title" value="<%=data[0].Title%>">
 				</div>
 				
 				<label for="category">Category</label>
@@ -59,16 +70,16 @@
 				
 				<label for="activity">Activity</label>
 				<div class="input-div">
-					<textarea class="input-tag-text" name="content" required value="<%=data[0].Content%>"><%=data[0].Content%></textarea>
+					<textarea class="input-tag-text" name="content" value="<%=data[0].Content%>"><%=data[0].Content%></textarea>
 				</div>
 
-				<label for="image">Image</label>
+				<label for="image">Image (not possible to edit right now)</label>
 				<div class="input-div">
-					<input class="input-tag" name="image" placeholder="IMG uploader will be here"><%=data[0].ImageSrc%></input>
+					<div class="input-tag"><%=data[0].ImageName%></div>
 				</div>
 
 				<div class="button-div">
-					<button id="change-btn" onclick="putActivity(<%=data[0].ActivityID%>)">Update</button>
+					<button id="save-btn" type="submit">Save</button>
 				</div>
 				
 			</form>

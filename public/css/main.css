@@ -1,3 +1,18 @@
+/* FONTS */
+/* WEIGHTS */
+/* COLORS */
+/* @MIXINS */
+.message {
+  background-color: #FF8B8B;
+  border-radius: 3px;
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  padding: 10px 0px; }
+
 #login-form {
   width: 400px;
   margin: 0 auto;
@@ -5,9 +20,28 @@
   #login-form .input-tag {
     width: 100%;
     height: 33px;
-    margin-bottom: 20px; }
+    margin-bottom: 20px;
+    border-radius: 3px; }
     #login-form .input-tag:focus {
       outline: none; }
+
+.errors, .success {
+  border-radius: 3px;
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  padding: 10px 0px; }
+
+.errors {
+  background-color: #FF8B8B; }
+
+.success {
+  background-color: #76e294; }
+  .success ul {
+    list-style-type: none; }
 
 .input-container {
   width: 100%;
@@ -35,14 +69,16 @@
         border: 1px solid #CCC;
         font-family: 'Lato', sans-serif;
         font-weight: 300;
-        font-size: 14px; }
+        font-size: 14px;
+        border-radius: 3px; }
       .input-container #add-form .input-div .input-tag-text, .input-container #change-form .input-div .input-tag-text {
         width: 100%;
         height: 100px;
         border: 1px solid #CCC;
         font-family: 'Lato', sans-serif;
         font-weight: 300;
-        font-size: 14px; }
+        font-size: 14px;
+        border-radius: 3px; }
       .input-container #add-form .input-div input:focus, .input-container #add-form .input-div select:focus, .input-container #add-form .input-div textarea:focus, .input-container #change-form .input-div input:focus, .input-container #change-form .input-div select:focus, .input-container #change-form .input-div textarea:focus {
         outline: none; }
 
@@ -59,10 +95,6 @@
   font-weight: 300;
   font-size: 14px; }
 
-/* FONTS */
-/* WEIGHTS */
-/* COLORS */
-/* @MIXINS */
 /* FONTSTYLING */
 h1 {
   margin: 0;
@@ -135,7 +167,7 @@ header {
   height: 50px;
   background-color: #EF6C00;
   border: none;
-  box-shadow: 0 11px 43px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2), 0 8px 12px rgba(0, 0, 0, 0.3);
   font-size: 20px;
   font-family: "Lato", sans-serif;
   font-weight: 300;
@@ -190,6 +222,15 @@ header {
   -ms-flex-pack: distribute;
       justify-content: space-around;
   margin-top: 15px; }
+  .filter label input {
+    visibility: hidden;
+    /* Makes input not-clickable */
+    position: absolute;
+    /* Remove input from document flow */ }
+  .filter label img {
+    cursor: pointer;
+    width: 50px;
+    height: 50px; }
 
 .activity-section {
   width: 95%;
@@ -200,7 +241,9 @@ header {
   -ms-flex-flow: row wrap;
       flex-flow: row wrap;
   -ms-flex-pack: distribute;
-      justify-content: space-around; }
+      justify-content: space-around;
+  /* POPUPS */
+  /* Outer */ }
   .activity-section .container {
     display: inline-block;
     margin: 10px;
@@ -208,20 +251,34 @@ header {
     height: 400px;
     box-shadow: 0 0px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     position: relative; }
+    .activity-section .container:hover {
+      cursor: pointer; }
     .activity-section .container .img {
       width: 100%;
       height: 180px;
       background-color: #d7d7d7; }
+      .activity-section .container .img .wrapper {
+        overflow: hidden;
+        width: 100%;
+        height: 180px;
+        position: relative; }
+        .activity-section .container .img .wrapper img {
+          width: 100%;
+          min-height: 180px;
+          position: absolute; }
+        .activity-section .container .img .wrapper .done {
+          opacity: 0.5; }
     .activity-section .container .text {
       margin: 15px;
-      height: 135px; }
+      height: 135px;
+      overflow: hidden; }
     .activity-section .container .change-btn, .activity-section .container .delete-btn {
       position: absolute;
       border-radius: 100%;
       width: 40px;
       height: 40px;
       border: none;
-      box-shadow: 0 11px 43px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.22);
+      box-shadow: 0 4px 9px rgba(0, 0, 0, 0.2), 0 3px 11px rgba(0, 0, 0, 0.32);
       font-size: 10px;
       font-family: "Lato", sans-serif;
       font-weight: 300;
@@ -237,3 +294,90 @@ header {
       right: 15px;
       bottom: 15px;
       background-color: #D32F2F; }
+  .activity-section .popup {
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 10;
+    /* Inner */ }
+    .activity-section .popup .popup-inner {
+      width: 450px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0px 2px 6px black;
+      border-radius: 3px;
+      background: #fff;
+      z-index: 11;
+      /* Close Button */ }
+      .activity-section .popup .popup-inner .popup-img {
+        width: 100%;
+        height: 300px; }
+        .activity-section .popup .popup-inner .popup-img .popup-wrapper {
+          overflow: hidden;
+          width: 100%;
+          height: 300px; }
+          .activity-section .popup .popup-inner .popup-img .popup-wrapper img {
+            width: 100%;
+            min-height: 300px; }
+      .activity-section .popup .popup-inner .text {
+        margin: 15px 15px 75px 15px; }
+      .activity-section .popup .popup-inner .change-btn, .activity-section .popup .popup-inner .delete-btn {
+        position: absolute;
+        border-radius: 100%;
+        width: 40px;
+        height: 40px;
+        border: none;
+        box-shadow: 0 4px 9px rgba(0, 0, 0, 0.2), 0 3px 11px rgba(0, 0, 0, 0.32);
+        font-size: 10px;
+        font-family: "Lato", sans-serif;
+        font-weight: 300;
+        color: white; }
+        .activity-section .popup .popup-inner .change-btn:hover, .activity-section .popup .popup-inner .delete-btn:hover {
+          cursor: pointer;
+          opacity: 0.9; }
+      .activity-section .popup .popup-inner .change-btn {
+        background-color: #303F9F;
+        top: 280px;
+        right: 15px; }
+      .activity-section .popup .popup-inner .delete-btn {
+        right: 15px;
+        bottom: 15px;
+        background-color: #D32F2F; }
+      .activity-section .popup .popup-inner .popup-close {
+        font-family: Arial, Sans-Serif;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 100%;
+        width: 15px;
+        height: 15px;
+        display: inline-block;
+        position: absolute;
+        top: -13px;
+        right: -7px;
+        transition: ease 0.25s all;
+        transform: translate(50%, -50%);
+        border-radius: 100%;
+        -moz-border-radius: 100%;
+        -webkit-border-radius: 100%; }
+      .activity-section .popup .popup-inner a {
+        color: white;
+        text-decoration: none; }
+        .activity-section .popup .popup-inner a:hover {
+          color: grey; }
+
+footer {
+  width: 100%;
+  height: 40px;
+  margin-top: 50px;
+  background-color: #3F51B5; }
+  footer p {
+    color: white;
+    text-align: center;
+    padding-top: 8px; }

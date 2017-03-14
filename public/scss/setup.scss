@@ -1,0 +1,39 @@
+
+/* FONTS */
+$lato: 'Lato', sans-serif;
+
+/* WEIGHTS */
+$thin: 100;
+$regular: 300;
+
+/* COLORS */
+$primary-color: #3F51B5;
+$dark-color: #303F9F;
+$accent-color: #EF6C00;
+$red: #FF8B8B;
+$green: #76e294;
+
+/* @MIXINS */
+
+@mixin thinlato ($lato, $thin) {
+	font-family: $lato;
+	font-weight: $thin;
+}
+
+@mixin regularlato ($lato, $regular) {
+	font-family: $lato;
+	font-weight: $regular;
+}
+
+@mixin btn() {
+	position: absolute;
+	border-radius: 100%;
+	width: 40px;
+	height: 40px;
+	border: none;
+	
+	box-shadow: 0 4px 9px rgba(0, 0, 0, 0.2), 0 3px 11px rgba(0, 0, 0, 0.32);
+	font-size: 10px;
+	@include regularlato($lato, $regular);
+	color: white;
+}
